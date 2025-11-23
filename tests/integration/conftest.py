@@ -6,10 +6,10 @@ from sqlalchemy.orm import sessionmaker
 from app.main import app
 from app.database import Base, get_db
 
-# In CI/CD (GitHub Actions), use the service container credentials
-# Locally, fall back to localhost
+# In CI/CD (GitHub Actions), use localhost (service containers are mapped to localhost)
+# Locally, also use localhost
 if os.getenv("CI"):  # GitHub Actions sets CI=true
-    TEST_DATABASE_URL = "postgresql://user:password@postgres:5432/mytestdb"
+    TEST_DATABASE_URL = "postgresql://user:password@localhost:5432/mytestdb"
 else:
     TEST_DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/calculator_test_db"
 
